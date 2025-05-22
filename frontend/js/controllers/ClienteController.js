@@ -27,11 +27,13 @@ export default class ClienteController {
 
     agregarCliente() {
         const nombre = document.getElementById('nombre').value;
+        const apellido = document.getElementById('apellido').value;
         const telefono = document.getElementById('telefono').value;
         const email = document.getElementById('email').value;
         const direccion = document.getElementById('direccion').value;
+        const dni = document.getElementById('dni').value;
 
-        const cliente = new Cliente(nombre, telefono, email, direccion);
+        const cliente = new Cliente(nombre,apellido, telefono, email, direccion, dni);
         this.clientes.push(cliente);
         this.view.renderClientes(this.clientes);
 
@@ -41,9 +43,11 @@ export default class ClienteController {
     editarCliente(index) {
         const cliente = this.clientes[index];
         document.getElementById('nombre').value = cliente.nombre;
+        document.getElementById('apellido').value = cliente.apellido;
         document.getElementById('telefono').value = cliente.telefono;
         document.getElementById('email').value = cliente.email;
         document.getElementById('direccion').value = cliente.direccion;
+        document.getElementById('dni').value = cliente.dni;
 
         this.eliminarCliente(index);
     }

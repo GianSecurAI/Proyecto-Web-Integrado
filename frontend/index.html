@@ -24,9 +24,13 @@
             <h2>Registrar Cliente</h2>
             <form id="form-cliente">
                 <div class="form-group">
-                    <label for="nombre">Nombre Completo</label>
+                    <label for="nombre">Nombres</label>
                     <input type="text" id="nombre" name="nombre" required>
                 </div>
+                <div class="form-group">
+                <label for="nombre">Apellidos</label>
+                <input type="text" id="apellido" name="apellido" required>
+            </div>
                 <div class="form-group">
                     <label for="telefono">Teléfono</label>
                     <input type="tel" id="telefono" name="telefono" required>
@@ -39,6 +43,10 @@
                     <label for="direccion">Dirección</label>
                     <textarea id="direccion" name="direccion" rows="3"></textarea>
                 </div>
+                <div class="form-group">
+                <label for="dni">DNI</label>
+                <input type="dni" id="dni" name="dni" required>
+            </div>
                 <button type="submit" id="btn-guardar">Guardar Cliente</button>
             </form>
         </section>
@@ -51,8 +59,10 @@
                 <thead>
                     <tr>
                         <th>Nombre</th>
+                        <th>Apellido</th>
                         <th>Teléfono</th>
                         <th>Email</th>
+                        <th>DNI</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
