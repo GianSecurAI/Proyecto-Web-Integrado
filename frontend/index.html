@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perfumería La Reyna - Gestión de Clientes</title>
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/productos.css">
 </head>
 <body>
     <header class="header">
@@ -77,25 +77,16 @@
                 <div class="form-group">
                     <label for="fecha">Fecha</label>
                     <input type="date" id="fecha" name="fecha" required>
-                </div>
-                <div class="form-group">
+                </div>                <div class="form-group">
                     <label for="cliente">Cliente</label>
                     <select id="cliente" name="cliente" required>
                         <option value="">Seleccione un cliente</option>
                         <!-- Opciones dinámicas -->
                     </select>
                 </div>
-                <div class="form-group">
-                    <label for="productos">Productos</label>
-                    <select id="productos" name="productos" multiple required>
-                        <option value="">Seleccione productos</option>
-                        <!-- Opciones dinámicas -->
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="monto">Monto Total ($)</label>
-                    <input type="number" id="monto" name="monto" step="0.01" required>
-                </div>
+                <!-- El área de productos seleccionados se obtiene desde el carrito -->
+                <input type="hidden" id="productos-input" name="productos">
+                <input type="hidden" id="monto" name="monto" step="0.01" required>
                 <div class="form-group">
                     <label for="metodo-pago">Método de Pago</label>
                     <select id="metodo-pago" name="metodo-pago" required>
@@ -107,36 +98,28 @@
                 </div>
                 <button type="submit" id="btn-registrar-venta">Registrar Venta</button>
             </form>
-        </section>
-        <section id="venta-list" class="card list-card">
+        </section>        <section id="venta-list" class="card list-card">
             <div class="list-header">
-                <h2>Lista de Ventas</h2>
-                <div class="filters">
-                    <input type="date" id="filtro-desde" placeholder="Desde">
-                    <input type="date" id="filtro-hasta" placeholder="Hasta">
-                    <button id="btn-filtrar">Filtrar</button>
-                    <select id="filtro-metodo">
-                        <option value="">Todos los métodos</option>
-                        <option value="efectivo">Efectivo</option>
-                        <option value="tarjeta-credito">Tarjeta de Crédito</option>
-                        <option value="tarjeta-debito">Tarjeta de Débito</option>
-                    </select>
+                <h2>Productos</h2>
+                <div class="search-bar">
+                    <input type="search" id="buscar-producto" placeholder="Buscar producto">
+                    <button id="btn-buscar-producto">Buscar</button>
                 </div>
             </div>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Fecha</th>
-                        <th>Cliente</th>
-                        <th>Monto</th>
-                        <th>Método</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody id="tbody-ventas">
-                    <!-- filas dinámicas -->
-                </tbody>
-            </table>
+            <div class="productos-scroll">
+                <div id="productos-container" class="productos-container">
+                    <!-- Contenido de productos dinámico -->
+                </div>
+            </div>
+            <div class="productos-seleccionados">
+                <h3>Productos Seleccionados</h3>
+                <div id="carrito-productos" class="carrito-productos">
+                    <!-- Productos seleccionados para la venta -->
+                </div>
+                <div class="total-container">
+                    <span>Total: $</span><span id="total-venta">0.00</span>
+                </div>
+            </div>
         </section>
     </main>
     <script type="module" src="js/main.js"></script>
