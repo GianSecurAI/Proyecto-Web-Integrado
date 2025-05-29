@@ -9,6 +9,7 @@ export default class VentaController {
         this.view = new VentaView();
         this.init();
         this.cargarProductos();
+        this.cargarVentasEjemplo(); // Agregar ventas de ejemplo
         
         // Actualizar el selector de clientes cuando cambie a la pestaña de ventas
         document.getElementById('tab-ventas').addEventListener('click', () => {
@@ -241,16 +242,33 @@ export default class VentaController {
         this.calcularTotal();
     }    registrarVenta() {
         const fecha = document.getElementById('fecha').value;
-        const cliente = document.getElementById('cliente').value;
-        const productos = this.productosSeleccionados.map(p => `${p.nombre} (${p.cantidad})`);
+        const clienteSelect = document.getElementById('cliente');
+        const clienteId = clienteSelect.value;
+        const productos = JSON.parse(document.getElementById('productos-input').value || '[]');
         const monto = parseFloat(document.getElementById('monto').value || 0);
-        const metodoPago = document.getElementById('metodo-pago').value;// Verificar que haya productos seleccionados
+        const metodoPago = document.getElementById('metodo-pago').value;
+        
+        // Verificar que haya productos seleccionados
         if (this.productosSeleccionados.length === 0) {
             alert('Debe seleccionar al menos un producto para registrar la venta.');
             return;
         }
 
-        const venta = new Venta(fecha, cliente, productos, monto, metodoPago);
+        // Obtener los datos completos del cliente
+        const clienteInfo = JSON.parse(clienteSelect.selectedOptions[0].dataset.cliente || '{}');
+        
+        const venta = new Venta(
+            fecha,
+            clienteId,
+            productos,
+            monto,
+            metodoPago,
+            {
+                nombre: clienteInfo.nombre || '',
+                apellido: clienteInfo.apellido || '',
+                dni: clienteInfo.dni || 'N/A'
+            }
+        );
         this.ventas.push(venta);
         
         // Reiniciar el formulario y el carrito
@@ -315,6 +333,94 @@ export default class VentaController {
         if (confirm('¿Está seguro de eliminar esta venta?')) {
             this.ventas.splice(index, 1);
             this.view.renderVentas(this.ventas);
+        }
+    }
+    
+    obtenerVentas() {
+        return this.ventas;
+    }
+    
+    cargarVentasEjemplo() {
+        if (this.ventas.length === 0) {
+            // Fechas de ejemplo (últimos 30 días)
+            const fechaActual = new Date();
+            const fechas = [];
+            
+            for (let i = 30; i >= 0; i--) {
+                const fecha = new Date(fechaActual);
+                fecha.setDate(fechaActual.getDate() - i);
+                fechas.push(fecha.toISOString().split('T')[0]);
+            }
+            
+            // Crear ventas de ejemplo con información completa del cliente
+            const venta1 = new Venta(
+                fechas[5],
+                'cliente-001',
+                [
+                    { id: 1, nombre: 'Perfume Floral', cantidad: 1, precio: 89.99 },
+                    { id: 3, nombre: 'Perfume Frutal', cantidad: 2, precio: 75.50 }
+                ],
+                241.99,
+                'efectivo',
+                {
+                    nombre: 'María',
+                    apellido: 'González',
+                    dni: '45678912'
+                }
+            );
+            
+            const venta2 = new Venta(
+                fechas[10],
+                'cliente-002',
+                [
+                    { id: 2, nombre: 'Perfume Amaderado', cantidad: 1, precio: 120.00 },
+                ],
+                120.00,
+                'tarjeta-credito',
+                {
+                    nombre: 'Juan',
+                    apellido: 'Pérez',
+                    dni: '76543210'
+                }
+            );
+            
+            const venta3 = new Venta(
+                fechas[15],
+                'cliente-001',
+                [
+                    { id: 4, nombre: 'Perfume Oriental', cantidad: 1, precio: 95.75 },
+                ],
+                95.75,
+                'tarjeta-debito',
+                {
+                    nombre: 'María',
+                    apellido: 'González',
+                    dni: '45678912'
+                }
+            );
+            
+            const venta4 = new Venta(
+                fechas[20],
+                'cliente-002',
+                [
+                    { id: 1, nombre: 'Perfume Floral', cantidad: 2, precio: 89.99 },
+                ],
+                179.98,
+                'efectivo',
+                {
+                    nombre: 'Juan',
+                    apellido: 'Pérez',
+                    dni: '76543210'
+                }
+            );
+            
+            // Agregar las ventas a la lista
+            this.ventas.push(venta1, venta2, venta3, venta4);
+            
+            // Actualizar la vista
+            if (this.view) {
+                this.view.renderVentas(this.ventas);
+            }
         }
     }
 }

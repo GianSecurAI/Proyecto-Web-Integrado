@@ -1,0 +1,286 @@
+/* Estilos para la sección de reportes */
+.reporte-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+}
+
+.fecha-filter {
+    background-color: #fff;
+    padding: 1.5rem;
+    border-radius: 8px;
+    border: 1px solid #eee;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    margin-bottom: 1.5rem;
+}
+
+.fecha-filter h3 {
+    margin: 0 0 1.2rem 0;
+    font-size: 1.1rem;
+    color: #444;
+    font-weight: 600;
+}
+
+.fecha-inputs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    align-items: flex-end;
+}
+
+.fecha-group {
+    flex: 1;
+    min-width: 200px;
+}
+
+.fecha-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.fecha-group input {
+    width: 100%;
+    padding: 0.7rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    color: #444;
+    background-color: #f9f9f9;
+    transition: all 0.3s ease;
+}
+
+.fecha-group input:focus {
+    border-color: #6a1b9a;
+    background-color: #fff;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(106, 27, 154, 0.1);
+}
+
+.fecha-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-left: auto;
+}
+
+.fecha-buttons button {
+    padding: 0.7rem 1.5rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+}
+
+.btn-actualizar {
+    background-color: #6a1b9a;
+    color: white;
+}
+
+.btn-actualizar:hover {
+    background-color: #8e24aa;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.btn-imprimir {
+    background-color: #f0f0f0;
+    color: #444;
+}
+
+.btn-imprimir:hover {
+    background-color: #e0e0e0;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.reporte-tabs {
+    display: flex;
+    gap: 10px;
+    border-bottom: 1px solid #dee2e6;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+.tab-reporte {
+    padding: 6px 12px;
+    background: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    color: #495057;
+}
+
+.tab-reporte:hover {
+    color: #007bff;
+    border-color: #e9ecef;
+}
+
+.tab-reporte.active {
+    color: #007bff;
+    border-color: #dee2e6;
+    border-bottom-color: white;
+    margin-bottom: -1px;
+    background-color: white;
+}
+
+.reporte-content {
+    position: relative;
+    overflow-x: auto;
+}
+
+.reporte-table {
+    width: 100%;
+    min-width: 1200px;
+    margin-bottom: 1rem;
+    background-color: #ffffff;
+}
+
+.reporte-table th, 
+.reporte-table td {
+    padding: 0.8rem;
+    text-align: left;
+    border-bottom: 1px solid #dee2e6;
+    white-space: nowrap;
+}
+
+.reporte-table thead th {
+    background-color: #f8f9fa;
+    color: #495057;
+    font-weight: 600;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    border-bottom: 2px solid #dee2e6;
+}
+
+.reporte-table tbody tr:hover {
+    background-color: #f8f9fa;
+}
+
+/* Estilos para la sección de análisis */
+.analisis-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.analisis-card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    flex: 1 0 300px;
+}
+
+.analisis-card h3 {
+    margin-top: 0;
+    color: #333;
+    font-size: 1.2rem;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.analisis-datos {
+    margin-top: 15px;
+}
+
+.dato-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+}
+
+.dato-label {
+    font-weight: 500;
+    color: #555;
+}
+
+.dato-valor {
+    font-weight: 700;
+    color: #333;
+}
+
+.analisis-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+.analisis-table th, 
+.analisis-table td {
+    padding: 8px 12px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+.analisis-table th {
+    background-color: #f8f9fa;
+    font-weight: 600;
+}
+
+.analisis-table tr:last-child td {
+    border-bottom: none;
+}
+
+/* Estilos para el gráfico */
+.full-width {
+    flex-basis: 100%;
+}
+
+@media (max-width: 768px) {
+    .analisis-container {
+        flex-direction: column;
+    }
+    
+    .grafico-container {
+        height: 200px;
+        overflow-x: auto;
+    }
+}
+
+/* Estilos para impresión */
+@media print {
+    .header, .form-card, nav, .fecha-buttons, .reporte-tabs {
+        display: none !important;
+    }
+
+    .list-card {
+        border: none !important;
+        box-shadow: none !important;
+        width: 100% !important;
+    }
+
+    .reporte-table {
+        width: 100% !important;
+    }
+
+    .fecha-filter {
+        border: none;
+        background: none;
+        padding: 0;
+        margin-bottom: 20px;
+    }
+
+    .fecha-filter h3 {
+        font-size: 16pt;
+        margin-bottom: 5px;
+    }
+
+    body, html {
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+}

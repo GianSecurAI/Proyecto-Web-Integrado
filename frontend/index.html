@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perfumería La Reyna - Gestión de Clientes</title>
+    <meta charset="UTF-8">    <meta name="viewport" content="width=device-width, initial-scale=1.0">    <title>Perfumería La Reyna - Gestión de Clientes</title>
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/productos.css">
+    <link rel="stylesheet" href="css/reportes.css">
 </head>
 <body>
     <header class="header">
@@ -12,10 +12,10 @@
             <h1>Perfumería La Reyna</h1>
             <button id="logout-button" class="logout-button">Cerrar Sesión</button>
         </div>
-        <nav>
-            <ul>
+        <nav>            <ul>
                 <li><a href="#" id="tab-clientes" class="active">Clientes</a></li>
                 <li><a href="#" id="tab-ventas">Ventas</a></li>
+                <li><a href="#" id="tab-reportes">Reportes</a></li>
             </ul>
         </nav>
     </header>
@@ -38,40 +38,54 @@
                 <div class="form-group">
                     <label for="email">Correo Electrónico</label>
                     <input type="email" id="email" name="email" required>
-                </div>
-                <div class="form-group">
+                </div>                <div class="form-group">
                     <label for="direccion">Dirección</label>
                     <textarea id="direccion" name="direccion" rows="3"></textarea>
                 </div>
                 <div class="form-group">
-                <label for="dni">DNI</label>
-                <input type="dni" id="dni" name="dni" required>
-            </div>
+                    <label for="distrito">Distrito</label>
+                    <input type="text" id="distrito" name="distrito" required>
+                </div>
+                <div class="form-group">
+                    <label for="sexo">Sexo</label>
+                    <select id="sexo" name="sexo" required>
+                        <option value="">Seleccione</option>
+                        <option value="hombre">Hombre</option>
+                        <option value="mujer">Mujer</option>
+                        <option value="no_determinado">No Determinado</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="dni">DNI</label>
+                    <input type="text" id="dni" name="dni" required>
+                </div>
                 <button type="submit" id="btn-guardar">Guardar Cliente</button>
             </form>
         </section>
-        <section id="cliente-list" class="card list-card">
-            <div class="list-header">
+        <section id="cliente-list" class="card list-card">            <div class="list-header">
                 <h2>Lista de Clientes</h2>
-                <input type="search" id="buscar" placeholder="Buscar por nombre o email">
+                <input type="search" id="buscar" placeholder="Buscar por DNI">
+            </div>            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Apellido</th>
+                            <th>Teléfono</th>
+                            <th>Email</th>
+                            <th>Dirección</th>
+                            <th>Distrito</th>
+                            <th>Sexo</th>
+                            <th>DNI</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody-clientes">
+                        <!-- filas dinámicas -->
+                    </tbody>
+                </table>
             </div>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Apellido</th>
-                        <th>Teléfono</th>
-                        <th>Email</th>
-                        <th>DNI</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody id="tbody-clientes">
-                    <!-- filas dinámicas -->
-                </tbody>
-            </table>
-        </section>
-        <section id="venta-form" class="card form-card">
+        </section>        <section id="venta-form" class="card form-card" style="display: none;">
             <h2>Registrar Venta</h2>
             <form id="form-venta">
                 <div class="form-group">
@@ -97,8 +111,7 @@
                     </select>
                 </div>
                 <button type="submit" id="btn-registrar-venta">Registrar Venta</button>
-            </form>
-        </section>        <section id="venta-list" class="card list-card">
+            </form>        </section>        <section id="venta-list" class="card list-card" style="display: none;">
             <div class="list-header">
                 <h2>Productos</h2>
                 <div class="search-bar">
@@ -119,11 +132,19 @@
                 <div class="total-container">
                     <span>Total: $</span><span id="total-venta">0.00</span>
                 </div>
-            </div>
+            </div>        </section>        <section id="reporte-section" class="card list-card" style="display: none;">
+            <!-- El contenido se cargará dinámicamente -->
         </section>
     </main>
-    <script type="module" src="js/main.js"></script>
-    <script>
+    <script type="module" src="js/main.js"></script>    <script>
+        // Verificar que el usuario esté autenticado como administrador
+        document.addEventListener('DOMContentLoaded', () => {
+            const role = sessionStorage.getItem('role');
+            if (role !== 'admin') {
+                window.location.href = 'login.html';
+            }
+        });
+        
         document.getElementById('logout-button').addEventListener('click', () => {
             sessionStorage.clear();
             window.location.href = 'login.html';
