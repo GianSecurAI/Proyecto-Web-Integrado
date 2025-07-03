@@ -1,0 +1,1 @@
+Desarrollo de una aplicacion web utilizando herramientas frontend tales como: Tymeleaf y herramientas backend tales como: Java Springboot y extensiones de SpringBoot como: Spring Web Dev Tools, Lombok, MySQL JDBC y JPA Repository.
